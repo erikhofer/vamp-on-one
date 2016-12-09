@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Vamp On One Calculator</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<style>
+		.container-fluid {
+			max-width: 500px;
+		}
+		
+		.col-sm-6 {
+			margin-top: 15px;
+		}
+	</style>
+	
+	<script>
+		function random() {
+			$("#x").val(Math.round(Math.random()*100));
+		}
+		
+		function calc() {
+			var p;
+			var n = Number($("#n").val());
+			var b = Number($("#b").val());
+			var v = Number($("#v").val());
+			if($("#cb").hasClass("active")) {
+				p = (((n-b)/2)+((v*(n-b))/(2*v+2))+v)/(n-b+v);
+			} else {
+				p = (v*(n-b)/(v+1)+v)/(n-b+v);
+			}
+			$("#p").val(Math.round(p*10000)/100+"%");
+		}
+		
+		function choose(b) {
+			var active = b ? $("#cb") : $("#cs");
+			var notActive = b ? $("#cs") : $("#cb");
+			active.addClass("active btn-primary");
+			active.removeClass("btn-default");
+			notActive.addClass("btn-default");
+			notActive.removeClass("active btn-primary");
+		}
+	
+	</script>
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="container-fluid">
+		<h2>Vamp On One Calculator</h2>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="input-group">
+					<span class="input-group-addon">Spieler</span>
+					<input id="n" type="number" class="form-control">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<span class="input-group-addon">Vamps</span>
+					<input id="v" type="number" class="form-control">
+				</div>
+			</div>			
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="input-group">
+					<span class="input-group-addon">Bürger</span>
+					<input id="b" type="number" class="form-control">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="btn-group btn-group-justified">
+					<a class="btn btn-primary active" id="cb" onclick="choose(true)">vs. Bürger</a>
+					<a class="btn btn-default" id="cs" onclick="choose(false)">vs. Schützi</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<button class="btn btn-primary" style="width: 100%" onclick="calc()">Berechnen</button>
+			</div>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<span class="input-group-addon">p =</span>
+					<input id="p" type="text" class="form-control" disabled>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<button class="btn btn-primary" style="width: 100%" onclick="random()">Würfeln</button>
+			</div>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<span class="input-group-addon">x =</span>
+					<input id="x" type="text" class="form-control" disabled>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>
